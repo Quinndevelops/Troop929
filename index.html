@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boy Scout Troop 929</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .tab:hover {
+            color: #007bff;
+        }
+
+        .tabcontent {
+            padding: 20px;
+        }
+
+        .additional-info {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 2px solid #ccc;
+        }
+
+        .image-gallery {
+            position: relative;
+        }
+
+        .image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Boy Scout Troop 929</h1>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" onclick="openTab(event, 'events')">Events</div>
+            <div class="tab" onclick="openTab(event, 'images')">Images</div>
+            <div class="tab" onclick="openTab(event, 'history')">History</div>
+        </div>
+        
+        <!-- Tab Content -->
+        <div id="events" class="tabcontent" style="display: block;">
+            <!-- Your events content goes here -->
+            <h2>Upcoming Events</h2>
+            <p>Here you can see the upcoming events of Troop 929.</p>
+            <ul>
+                <li>Meeting - March 11th at 7:00pm - 8:00pm</li>
+                <li>Campout - March 16th - 17th</li>
+                <li>Meeting - March 18th 7:00pm - 8:00pm</li>
+            </ul>
+        </div>
+        
+        <div id="images" class="tabcontent">
+            <!-- Your images content goes here -->
+            <div class="image-gallery">
+                <img class="image" src="https://i.imghippo.com/files/lO8YF1709866008.jpg" alt="">
+                <button class="prev" onclick="prevImage()">&#10094;</button>
+                <button class="next" onclick="nextImage()">&#10095;</button>
+            </div>
+        </div>
+        
+        <div id="history" class="tabcontent">
+            <!-- Your history content goes here -->
+            <p>Nothing Here Yet!</p>
+        </div>
+
+        <!-- Additional Information Section -->
+        <div class="additional-info">
+            <h2>Additional Information</h2>
+            <p>Scoutbook Link: <a href="https://www.scouting.org/resources/scoutbook/">here</a></p>
+            <p>Scouting Newsroom Link: <a href="https://www.scoutingnewsroom.org/">here</a></p>
+        </div>
+    </div>
+
+    <script>
+        var currentIndex = 0;
+        var images = [
+            "https://i.imghippo.com/files/lO8YF1709866008.jpg",
+            "https://i.imghippo.com/files/8CVsv1709866513.jpg"
+            // Add more image URLs as needed
+        ];
+
+        function showImage(index) {
+            var imageElement = document.querySelector('.image');
+            imageElement.src = images[index];
+            currentIndex = index;
+        }
+
+        function prevImage() {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            }
+            showImage(currentIndex);
+        }
+
+        function nextImage() {
+            currentIndex++;
+            if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            showImage(currentIndex);
+        }
+
+        // Show the first image initially
+        showImage(currentIndex);
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+
+            // Add 'active' class to the clicked tab
+            var tabs = document.getElementsByClassName("tab");
+            for (i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
